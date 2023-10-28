@@ -1,9 +1,9 @@
 {
   "web": {
-    "port": 3000,
+    "port": 80,
     "paths": {
       "static": "public",
-      "listenTo": "https://oldtime.radio/listen-to/",
+      "listenTo": "https://localhost/listen-to/",
       "api": {
         "shows": "/api/shows",
         "channels": "/api/channels",
