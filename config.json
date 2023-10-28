@@ -3,7 +3,7 @@
     "port": 80,
     "paths": {
       "static": "public",
-      "listenTo": "https://localhost/listen-to/",
+      "listenTo": "https://127.0.0.1/listen-to/",
       "api": {
         "shows": "/api/shows",
         "channels": "/api/channels",
