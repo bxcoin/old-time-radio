@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codebox/old-time-radio.git"
+    "url": "git+https://github.com/bxcoin/old-time-radio.git"
   },
   "author": "Rob Dawson <rob@codebox.net> (http://codebox.net)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/codebox/old-time-radio/issues"
+    "url": "https://github.com/bxcoin/old-time-radio/issues"
   },
-  "homepage": "https://github.com/codebox/old-time-radio/issues",
+  "homepage": "https://github.com/bxcoin/old-time-radio/issues",
   "dependencies": {
     "axios": "^0.21.2",
     "express": "^4.17.3",
