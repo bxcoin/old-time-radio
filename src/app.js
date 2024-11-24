@@ -3,8 +3,11 @@
 const config = require('../config.json'),
     log = require('./log.js'),
     service = require('./service.js'),
+    { checkConfig } = require('./configChecker.js'),
     express = require('express'),
     app = express();
+
+checkConfig(config);
 
 const port = config.web.port;
 
@@ -52,6 +55,12 @@ app.get(config.web.paths.api.channel + ':channel', (req, res) => {
 app.get(config.web.paths.api.generate + ":indexes", (req, res) => {
     const indexes = req.params.indexes.split(',').map(s => Number(s));
     res.status(200).json(service.getCodeForShowIndexes(indexes));
+});
+
+// [{channelId: 'action', initialOffset: 123.456, list: [{archivalUrl: "http://...", length: 1234.56, name: "X Minus One - Episode 079", url: "http://...", commercial: false}, ...]}, ...]
+app.get(config.web.paths.api.playingNow, (req, res) => {
+    const channels = (req.query.channels || '').split(',').filter(c => c);
+    service.getPlayingNowAndNext(channels).then(result => res.status(200).json(result));
 });
 
 app.get("/sitemap.xml", (req, res) => {

@@ -59,6 +59,10 @@ const config = {
         refreshIntervalMillis: 5000,
         lengthInSeconds: 12 * 60 * 60
     },
+    playingNow: {
+        apiCallIntervalMillis: 30 * 1000,
+        infoDisplayIntervalMillis: 5 * 1000,
+    },
     messages: {
         canned: {
             "all": [
@@ -67,7 +71,8 @@ const config = {
                 'Volume too loud? You can turn it down, click the menu ↗',
                 'Please support The Internet Archive by donating at http://archive.org/donate',
                 'Build your own channel with your favourite shows, click the menu ↗',
-                'To change the visualiser or turn it off, click the menu ↗'
+                'To change the visualiser or turn it off, click the menu ↗',
+                'Are these messages annoying? You can turn them off via the menu! ↗'
             ],
             "normal": [
                 'To check the channel schedules, click the menu ↗'
@@ -83,5 +88,18 @@ const config = {
         charPrintIntervalMillis: 40,
         tempMessageDurationMillis: 5000,
         tempMessageIntervalMillis: 60 * 1000
+    },
+    snow: {
+        maxFlakeCount: 500,
+        minFlakeSize: 0.5,
+        maxFlakeSize: 3,
+        maxXSpeed: 0.5,
+        minYSpeed: 0.3,
+        maxYSpeed: 2,
+        windSpeedMax: 0.5,
+        windSpeedDelta: 0.001,
+        windSpeedChangeIntervalSeconds: 10,
+        snowflakeAddIntervalSeconds: 0.1,
+        distanceColourFade: 3
     }
 };

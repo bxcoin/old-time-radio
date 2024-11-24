@@ -1,4 +1,4 @@
-function buildView(eventSource) {
+function buildView(eventSource, model) {
     "use strict";
     const FEW_CHANNELS_LIMIT = 4,
         channelButtons = {},
@@ -15,11 +15,14 @@ function buildView(eventSource) {
         elMenuBox = document.getElementById('menu'),
         elVolumeUp = document.getElementById('volumeUp'),
         elVolumeDown = document.getElementById('volumeDown'),
+        elPrefInfoMessages = document.getElementById('prefInfoMessages'),
+        elPrefNowPlayingMessages = document.getElementById('prefNowPlayingMessages'),
         elMessage = document.getElementById('message'),
         elDownloadLink = document.getElementById('downloadLink'),
         elButtonContainer = document.getElementById('buttons'),
         elVolumeLeds = Array.from(Array(10).keys()).map(i => document.getElementById(`vol${i+1}`)),
-        elVisualiserCanvas = document.getElementById('canvas'),
+        elVisualiserCanvas = document.getElementById('visualiserCanvas'),
+        elPlayingNowCanvas = document.getElementById('playingNowCanvas'),
         elVisualiserButtons = document.getElementById('visualiserList'),
         elTitle = document.getElementsByTagName('title')[0],
 
@@ -66,7 +69,8 @@ function buildView(eventSource) {
     function buildVisualiserButton(id) {
         const button = document.createElement('button');
         button.innerHTML = id;
-        button.classList.add('menuButton', `umami--click--visualiser-${id.toLowerCase()}`);
+        button.classList.add('menuButton');
+        button.setAttribute('data-umami-event', `visualiser-${id.toLowerCase()}`);
         button.setAttribute('role', 'radio');
         button.onclick = () => {
             eventSource.trigger(EVENT_VISUALISER_BUTTON_CLICK, id);
@@ -106,6 +110,8 @@ function buildView(eventSource) {
         };
     })();
 
+    const playingNowPrinter = buildPlayingNowManager(model, elPlayingNowCanvas);
+
     function triggerWake() {
         eventSource.trigger(EVENT_WAKE_UP);
     }
@@ -129,7 +135,17 @@ function buildView(eventSource) {
         eventSource.trigger(EVENT_VOLUME_DOWN_CLICK);
     };
 
+    elPrefInfoMessages.onclick = () => {
+        eventSource.trigger(EVENT_PREF_INFO_MESSAGES_CLICK);
+    }
+
+    elPrefNowPlayingMessages.onclick = () => {
+        eventSource.trigger(EVENT_PREF_NOW_PLAYING_CLICK);
+    }
+
     sleepTimerView.init();
+
+    const snowMachine = buildSnowMachine(elVisualiserCanvas);
 
     return {
         on: eventSource.on,
@@ -249,6 +265,17 @@ function buildView(eventSource) {
         setVisualiser(audioVisualiser) {
             audioVisualiser.init(elVisualiserCanvas);
         },
+        showPlayingNowDetails(playingNowDetails) {
+            elPlayingNowCanvas.style.display = 'block';
+            playingNowPrinter.start(playingNowDetails);
+        },
+        updatePlayingNowDetails(playingNowDetails) {
+            playingNowPrinter.update(playingNowDetails);
+        },
+        hidePlayingNowDetails() {
+            elPlayingNowCanvas.style.display = 'none';
+            playingNowPrinter.stop();
+        },
         showDownloadLink(mp3Url) {
             elDownloadLink.innerHTML = `<a href="${mp3Url}" target="_blank">Download this show as an MP3 file</a>`;
         },
@@ -274,8 +301,22 @@ function buildView(eventSource) {
                 el.setAttribute('aria-controls', 'canvas');
             });
         },
+        updatePrefInfoMessages(showInfoMessages) {
+            elPrefInfoMessages.classList.toggle(CLASS_SELECTED, showInfoMessages);
+            elPrefInfoMessages.innerHTML = showInfoMessages ? 'On' : 'Off';
+        },
+        updatePrefNowPlayingMessages(showNowPlayingMessages) {
+            elPrefNowPlayingMessages.classList.toggle(CLASS_SELECTED, showNowPlayingMessages);
+            elPrefNowPlayingMessages.innerHTML = showNowPlayingMessages ? 'On' : 'Off';
+        },
         addShowTitleToPage(title) {
             elTitle.innerHTML += (' - ' + title);
+        },
+        startSnowMachine(intensity) {
+            snowMachine.start(intensity);
+        },
+        stopSnowMachine() {
+            snowMachine.stop();
         }
     };
 }

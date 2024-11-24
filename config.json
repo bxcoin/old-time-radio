@@ -8,7 +8,8 @@
         "shows": "/api/shows",
         "channels": "/api/channels",
         "channel": "/api/channel/",
-        "generate": "/api/channel/generate/"
+        "generate": "/api/channel/generate/",
+        "playingNow": "/api/playing-now"
       }
     }
   },
@@ -125,7 +126,8 @@
     {
       "name": "I Love a Mystery",
       "playlists": ["otr_iloveamystery"],
-      "index": 18
+      "index": 18,
+      "skip": ["interview"]
     },
     {
       "name": "Suspense",
@@ -172,7 +174,8 @@
     {
       "name": "Have Gun Will Travel",
       "playlists": ["HaveGunWillTravel_OldTimeRadio"],
-      "index": 27
+      "index": 27,
+      "skip": ["64kb"]
     },
     {
       "name": "Tales of the Texas Rangers",
@@ -183,7 +186,8 @@
     {
       "name": "The Six Shooter",
       "playlists": ["OTRR_The_Six_Shooter_Singles"],
-      "index": 29
+      "index": 29,
+        "skip": ["OTRR Introduction", "The Six Shooter Intro", "Jimmy Stewart Biography", "Hollywood Star Playhouse"]
     },
     {
       "name": "Fort Laramie",
@@ -216,7 +220,8 @@
       "name": "The Phil Harris - Alice Faye Show",
       "shortName": "Phil Harris - Alice Faye",
       "playlists": ["OTRR_Harris_Faye_Singles"],
-      "index": 35
+      "index": 35,
+        "skip": ["Audio Bio", "audio synopsis"]
     },
     {
       "name": "Fibber McGee and Molly",
@@ -285,7 +290,8 @@
     {
       "name": "The Black Museum",
       "playlists": ["OTRR_Black_Museum_Singles"],
-      "index": 48
+      "index": 48,
+        "skip": ["Intro", "Biography"]
     },
     {
       "name": "My Favorite Husband",
@@ -331,7 +337,7 @@
     {
       "name": "CBS Radio Mystery Theater",
       "shortName": "CBS Radio Mystery Theater",
-      "playlists": ["theoldonesarehardtokill_20191104_1301", "CbsRadioMysteryTheater1975Page1", "CbsRadioMysteryTheater1976Page1", "CbsRadioMysteryTheater1976Page2", "CbsRadioMysteryTheater1976Page3", "CbsRadioMysteryTheater1976Page4", "CbsRadioMysteryTheater1976Page5"],
+      "playlists": ["CbsRadioMysteryTheater1975Page1", "CbsRadioMysteryTheater1976Page1", "CbsRadioMysteryTheater1976Page2", "CbsRadioMysteryTheater1976Page3", "CbsRadioMysteryTheater1976Page4", "CbsRadioMysteryTheater1976Page5"],
       "index": 57
     },
     {
@@ -348,7 +354,8 @@
     {
       "name": "Let George Do It",
       "playlists": ["OTRR_Let_George_Do_It_Singles"],
-      "index": 60
+      "index": 60,
+        "skip": ["Audition"]
     },
     {
       "name": "Father Knows Best",
@@ -388,7 +395,8 @@
     {
       "name": "On Stage",
       "playlists": ["OTRR_On_Stage_Singles_201901"],
-      "index": 68
+      "index": 68,
+        "skip": ["audio brief", "Bio"]
     },
     {
       "name": "Screen Guild Theater",
@@ -458,7 +466,8 @@
     {
       "name": "Whitehall 1212",
       "playlists": ["OTRR_Whitehall_1212_Singles"],
-      "index": 82
+      "index": 82,
+        "skip": ["Series Synopsis", "star bio", "Audition"]
     },
     {
       "name": "The Adventures of Frank Race",
@@ -498,7 +507,8 @@
     {
       "name": "The Man Called X",
       "playlists": ["OTRR_Man_Called_X_Singles"],
-      "index": 90
+      "index": 90,
+        "skip": ["Series Synopsis", "Herbert Marshall", "Leon Blasco"]
     },
     {
       "name": "Counter-Spy",
@@ -543,7 +553,8 @@
     {
       "name": "Wild Bill Hickok",
       "playlists": ["OTRR_Wild_Bill_Hickock_Singles"],
-      "index": 99
+      "index": 99,
+        "skip": ["Series Synopsis", "Bio"]
     },
     {
       "name": "Candy Matson",
@@ -553,7 +564,8 @@
     {
       "name": "Sam Spade",
       "playlists": ["OTRR_Sam_Spade_Singles"],
-      "index": 101
+      "index": 101,
+        "skip": ["Intro", "Biography", "SamShovel", "Bbc", "Spoof", "Suspense", "TheMalteseFalcon", "BurnsAllen"]
     },
     {
       "name": "Radio Reader's Digest",
@@ -568,7 +580,8 @@
     {
       "name": "Black Flame of the Amazon",
       "playlists": ["OTRR_Black_Flame_Singles"],
-      "index": 104
+      "index": 104,
+        "skip": ["Introduction"]
     },
     {
       "name": "The Shadow",
@@ -588,12 +601,14 @@
     {
       "name": "Mr. Keen, Tracer of Lost Persons",
       "playlists": ["OTRR_Mr_Keen_Tracer_Of_Lost_Persons_Singles"],
-      "index": 108
+      "index": 108,
+      "skip": ["Introduction", "Producers", "Biography"]
     },
     {
       "name": "Rocky Jordan",
       "playlists": ["RockyJordan"],
-      "index": 109
+      "index": 109,
+      "skip": ["Audition"]
     },
     {
       "name": "Nick Carter, Master Detective",
@@ -709,6 +724,172 @@
       "name": "Challenge of the Yukon",
       "playlists": ["OTRR_Challenge_of_the_Yukon_Singles"],
       "index": 132
+    },
+    {
+      "name": "Michael Shayne",
+      "playlists": ["Michael_Shayne"],
+      "index": 133
+    },
+    {
+      "name": "Mr Moto",
+      "playlists": ["MrMoto"],
+      "index": 134
+    },
+    {
+      "name": "It Pays To Be Ignorant",
+      "playlists": ["ItPaysToBeIgnorant"],
+      "index": 135
+    },
+    {
+      "name": "Jeff Regan",
+      "playlists": ["OTRR_Jeff_Regan_Singles"],
+      "index": 136
+    },
+    {
+      "name": "You Bet Your Life",
+      "playlists": ["you-bet-your-life-1952-02-20-160-secret-word-heart"],
+      "index": 137
+    },
+    {
+      "name": "The Scarlet Pimpernel",
+      "playlists": ["The_Scarlet_Pimpernel"],
+      "index": 138
+    },
+    {
+      "name": "Dr. Christian",
+      "playlists": ["Dr.Christian_911"],
+      "index": 139
+    },
+    {
+      "name": "One Man's Family",
+      "playlists": ["OneMansFamily"],
+      "index": 140
+    },
+    {
+      "name": "The Goldbergs",
+      "playlists": ["Goldbergs"],
+      "index": 141
+    },
+    {
+      "name": "Ma Perkins",
+      "playlists": ["MaPerkins021950"],
+      "index": 142
+    },
+    {
+      "name": "Adventures of Frank Merriwell",
+      "playlists": ["AdventuresofFrankMerriwell"],
+      "index": 143
+    },
+    {
+      "name": "Adventures of Maisie",
+      "playlists": ["Maisie"],
+      "index": 144
+    },
+    {
+      "name": "Red Ryder",
+      "playlists": ["red-ryder"],
+      "index": 145
+    },
+    {
+      "name": "Horizons West",
+      "playlists": ["OtrHorizonsWest13Of13Eps"],
+      "index": 146
+    },
+    {
+      "name": "Mark Trail",
+      "playlists": ["mark_trail"],
+      "index": 147
+    },
+    {
+      "name": "Luke Slaughter",
+      "playlists": ["OTRR_Luke_Slaughter_Of_Tombstone_Singles"],
+      "index": 148
+    },
+    {
+      "name": "Information, Please",
+      "playlists": ["Information-Please"],
+      "index": 149
+    },
+    {
+      "name": "My Friend Irma",
+      "playlists": ["my-friend-irma"],
+      "index": 150
+    },
+    {
+      "name": "Eb and Zeb",
+      "playlists": ["EbZeb"],
+      "index": 151
+    },
+    {
+      "name": "The Milton Berle Show",
+      "playlists": ["Milton_Berle_47-48"],
+      "index": 152
+    },
+    {
+      "name": "The Goon Show",
+      "playlists": ["TheGoonShow1950to1960"],
+      "index": 153
+    },
+    {
+      "name": "The Spike Jones Show",
+      "playlists": ["SpikeJones"],
+      "index": 154
+    },
+    {
+      "name": "Easy Aces",
+      "playlists": ["otr_easyaces"],
+      "index": 155
+    },
+    {
+      "name": "The Red Skelton Show",
+      "playlists": ["red-skelton-show_202008"],
+      "index": 156
+    },
+    {
+      "name": "Ghost Corps",
+      "playlists": ["otr_ghostcorps"],
+      "index": 157
+    },
+    {
+      "name": "Dick Barton, Special Agent",
+      "playlists": ["otr_dickbartonspecialagent"],
+      "index": 158
+    },
+    {
+      "name": "21st Precinct",
+      "playlists": ["OTRR_21st_Precinct_Singles"],
+      "index": 159
+    },
+    {
+      "name": "Pete Kelly's Blues",
+      "playlists": ["PeteKellysBlues"],
+      "index": 160,
+      "skip": ["64kb"]
+    },
+    {
+      "name": "The Line-Up",
+      "playlists": ["OTRR_Line_Up_Singles"],
+      "index": 161
+    },
+    {
+      "name": "Diary of Fate",
+      "playlists": ["DiaryOfFate"],
+      "index": 162
+    },
+    {
+      "name": "Ripley's Believe It or Not",
+      "playlists": ["believe-it-or-not"],
+      "index": 163
+    },
+    {
+      "name": "Bill Stern Sports Reel",
+      "playlists": ["Bill_Sterns_Sports_Newsreel"],
+      "index": 164
+    },
+    {
+      "name": "World Adventurer's Club",
+      "playlists": ["OTRR_World_Adventurer_Club_Singles"],
+      "index": 165
     }
   ],
   "channels" : [
@@ -718,35 +899,35 @@
     },
     {
       "name" : "action",
-      "shows": [0,10,11,14,15,16,18,39,40,42,59,79,80,83,86,90,91,92,104,115,131,132]
+      "shows": [0,10,11,14,15,16,18,39,40,42,59,79,80,83,86,90,91,92,104,115,131,132,138,165]
     },
     {
       "name" : "crime",
-      "shows": [0,12,13,22,23,24,37,41,47,48,52,58,60,62,63,75,82,89,94,100,101,107,108,110,112,124,127,130]
+      "shows": [0,12,13,22,23,24,37,41,47,48,52,58,60,62,63,75,82,89,94,100,101,107,108,110,112,124,127,130,133,136,159,160,161]
     },
     {
       "name" : "horror",
-      "shows": [0,17,43,44,53,54,78,81,98,128,129]
+      "shows": [0,17,43,44,53,54,78,81,98,128,129,162]
     },
     {
       "name" : "suspense",
-      "shows": [0,19,20,21,38,45,51,56,57,85,105,106,109,113]
+      "shows": [0,19,20,21,38,45,51,56,57,85,105,106,109,113,134,157,158]
     },
     {
       "name" : "western",
-      "shows": [0,25,26,27,28,29,30,55,93,97,99]
+      "shows": [0,25,26,27,28,29,30,55,93,97,99,145,146,147,148]
     },
     {
       "name" : "comedy",
-      "shows": [0,31,32,33,34,35,36,46,49,61,64,76,84,87,88,95,96,111,114,116,117,118,119,120,121,123,125,126]
+      "shows": [0,31,32,33,34,35,36,46,49,61,64,76,84,87,88,95,96,111,114,116,117,118,119,120,121,123,125,126,135,137,149,150,151,152,153,154,155,156]
     },
     {
       "name" : "drama",
-      "shows": [0,65,66,67,68,69,70,71,72,73,74,102]
+      "shows": [0,65,66,67,68,69,70,71,72,73,74,102,139,140,141,142,143,144]
     },
     {
       "name" : "sports",
-      "shows": [103]
+      "shows": [0,103,164]
     }
   ]
 }

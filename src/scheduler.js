@@ -1,5 +1,5 @@
 "use strict";
-const channelData = require('./channelData.js'),
+const {configHelper} = require('./configHelper.js'),
     playlistData = require('./playlistData.js'),
     channelCodes = require('./channelCodes'),
     clock = require('./clock.js'),
@@ -11,7 +11,7 @@ const channelData = require('./channelData.js'),
 
 const getFullScheduleForChannel = memoize(async channelNameOrCode => { //TODO limit how many we store in memory
     async function getShowListForChannel(channelNameOrCode) {
-        const allShows = await channelData.getShows(),
+        const allShows = await configHelper.getShows(),
             showsForPredefinedChannel = allShows.filter(show => show.channels.includes(channelNameOrCode));
 
         if (showsForPredefinedChannel.length) {
@@ -69,7 +69,7 @@ const getFullScheduleForChannel = memoize(async channelNameOrCode => { //TODO li
             if (show.isCommercial && !isOnlyCommercials) {
                 commercials.push(...files);
             } else {
-                unbalancedShowsToFiles[show.name] = files;
+                unbalancedShowsToFiles[show.shortName] = files;
             }
         });
 
@@ -95,7 +95,7 @@ const getFullScheduleForChannel = memoize(async channelNameOrCode => { //TODO li
             })();
 
         while (true) {
-            let largestFractionToRemain = -1, listToReduce = [];
+            let largestFractionToRemain = -1, listToReduce = [], showNameToReduce;
 
             Object.entries(showsToFiles).forEach(entry => {
                 const [showName, files] = entry,
@@ -105,13 +105,14 @@ const getFullScheduleForChannel = memoize(async channelNameOrCode => { //TODO li
                 if (fractionToRemain > largestFractionToRemain) {
                     largestFractionToRemain = fractionToRemain;
                     listToReduce = files;
+                    showNameToReduce = showName;
                 }
             });
 
             if (listToReduce.length) {
-                schedule.push(listToReduce.shift());
+                schedule.push({...listToReduce.shift(), showName: showNameToReduce});
                 if (hasCommercials) {
-                    schedule.push(nextCommercial());
+                    schedule.push({...nextCommercial(), showName: "Commercial"});
                 }
 
             } else {
@@ -152,7 +153,7 @@ function getCurrentPlaylistPosition(playlist, playlistDuration) {
     };
 }
 
-function getCurrentSchedule(fullSchedule, playlistMinLength) {
+function getCurrentSchedule(fullSchedule, stopCondition) {
     const episodeList = fullSchedule.schedule,
         playlistLength = fullSchedule.length,
         clientPlaylist = [];
@@ -160,7 +161,7 @@ function getCurrentSchedule(fullSchedule, playlistMinLength) {
     let {index, offset} = getCurrentPlaylistPosition(episodeList, playlistLength);
 
     let currentPlaylistDuration = -offset;
-    while (currentPlaylistDuration < playlistMinLength) {
+    while (!stopCondition(currentPlaylistDuration, clientPlaylist.length)) {
         const currentItem = episodeList[index % episodeList.length];
         clientPlaylist.push(currentItem);
         currentPlaylistDuration += currentItem.length;
@@ -173,11 +174,34 @@ function getCurrentSchedule(fullSchedule, playlistMinLength) {
     };
 }
 
+function playlistReachedMinDuration(minDuration) {
+    return (currentPlaylistDuration) => {
+        return currentPlaylistDuration >= minDuration;
+    };
+}
+
+function playlistContainsRequiredNumberOfItems(numberOfItems) {
+    return (_, currentPlaylistSize) => {
+        return currentPlaylistSize >= numberOfItems;
+    };
+}
+
 module.exports = {
     async getScheduleForChannel(channelNameOrCode, lengthInSeconds) {
         const fullSchedule = await getFullScheduleForChannel(channelNameOrCode),
-            currentSchedule = getCurrentSchedule(fullSchedule, Math.min(lengthInSeconds, MAX_SCHEDULE_LENGTH));
+            currentSchedule = getCurrentSchedule(fullSchedule, playlistReachedMinDuration(Math.min(lengthInSeconds, MAX_SCHEDULE_LENGTH)));
 
         return currentSchedule;
+    },
+    async getPlayingNowAndNext(channelNameOrCode) {
+        const fullSchedule = await getFullScheduleForChannel(channelNameOrCode),
+            // min length of '3' guarantees we get the current show and the next show even if there are commercials playing between them
+            currentSchedule = getCurrentSchedule(fullSchedule, playlistContainsRequiredNumberOfItems(3));
+
+        return {
+            channelId: channelNameOrCode,
+            list: currentSchedule.list.filter(item => !item.commercial).slice(0, 2),
+            initialOffset: currentSchedule.initialOffset
+        };
     }
 }
